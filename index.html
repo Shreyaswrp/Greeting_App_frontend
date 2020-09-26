@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>GreetingsApp</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <!--For side items-->
+      <div class="col col-lg-2 navList">
+        <div class="list-group col-12" id="myList" role="sideitems">
+          <p class="side-items list-group-item-action fa fa-list"> List</p>
+          <p class=" side-items list-group-item-action fa fa-plus-square"> Add</p>
+          <p class="side-items list-group-item-action fa fa-pencil-square-o"> Edit</p>
+          <p class="side-items list-group-item-action fa fa-trash"> Delete</p>
+        </div>
+      </div>
+
+    <!--For navigation items-->  
+    <div class="col col-lg-10 frontPage">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="./index.html">Greetings App</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse  justify-content-end" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLink" role="button"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  &#x1F514; 
+                </a>
+               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><img src ="../images/email.png" width="20px"></a>
+              </li>
+              <li class="nav-item">
+                <span class="nav-link" href="#"><img src ="../images/q.png" width="20px">Support</span>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">&#128736;Tools</a>
+              </li>
+            </ul>
+            <!--Header Buttons for Sign in and Sign up -->
+            <div class = "header-buttons">
+              <button class="button buttonSignUp text">SignIn</button>
+              <button class="button buttonSignIn text">SignUp</button>
+            </div>
+          </div>
+        </nav>
+
+        <!--Page title-->
+        <h2 class="title-of-page">Basic panels Layout</h2>
+
+        <!--Add a new greeting-->
+        <div class = "row mt-3">
+          <div class = "col-md-6">
+              <h3>Add new post</h3>
+              <form class="add-post-form">
+                  <form class="form-group">
+                      <label for="firstName">FirstName </label>
+                      <input type="text" class="form-control" id="firstName-value">
+                  </form>
+                  <form class="form-group">
+                      <label for="lastName">LastName </label>
+                      <input type="text" class="form-control" id="lastName-value">
+                  </form>
+                      <form class="form-group">
+                      <label for="greeting">Greeting </label>
+                      <input type="text" class="form-control" id="greeting-value">
+                  </form>
+                  <button type ="submit" class="btn btn-primary">Submit</button>
+              </form>
+          </div>
+      </div>
+
+<!--To show all the cards-->
+      <div class="posts-list row">
+    </div>
+
+        
+    </div>
+  </div>
+  <script src="./main.js"></script>
+</body>
+</html>
