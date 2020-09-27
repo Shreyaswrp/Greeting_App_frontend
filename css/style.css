@@ -50,7 +50,7 @@ body {
   border: 4px groove rgba(255, 228, 220, 0.7);
 }
 
-.container {
+.containerPageDim{
   margin: 0;
   max-width: 98rem;
   width: 100%;
@@ -76,6 +76,10 @@ body {
 
 .frontPage {
   padding: 0;
+}
+
+#addForm {
+  display: none;
 }
 
 

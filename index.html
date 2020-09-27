@@ -13,13 +13,13 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="containerPageDim">
     <div class="row">
       <!--For side items-->
       <div class="col col-lg-2 navList">
         <div class="list-group col-12" id="myList" role="sideitems">
           <p class="side-items list-group-item-action fa fa-list"> List</p>
-          <p class=" side-items list-group-item-action fa fa-plus-square"> Add</p>
+          <p class=" side-items list-group-item-action fa fa-plus-square" id="addPostGreeting" onclick="getFormInPopup()"> Add</p>
           <p class="side-items list-group-item-action fa fa-pencil-square-o"> Edit</p>
           <p class="side-items list-group-item-action fa fa-trash"> Delete</p>
         </div>
@@ -62,35 +62,47 @@
         <!--Page title-->
         <h2 class="title-of-page">Basic panels Layout</h2>
 
-        <!--Add a new greeting-->
-        <div class = "row mt-3">
-          <div class = "col-md-6">
-              <h3>Add new post</h3>
+
+<!--To show all the cards-->
+      <div class="posts-list row"></div>
+
+      <!--To show form in popup-->
+      <div class="modal" tabindex="-1" role="dialog" id="addForm">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add new greeting</h5>
+              <button type="button" class="close" data-dismiss="modal" onclick="closeForm()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
               <form class="add-post-form">
                   <form class="form-group">
                       <label for="firstName">FirstName </label>
-                      <input type="text" class="form-control" id="firstName-value">
+                      <input type="text" class="form-control" id="firstName-value" value=" " onchange="getFirstName(this.value)"/>
                   </form>
                   <form class="form-group">
                       <label for="lastName">LastName </label>
-                      <input type="text" class="form-control" id="lastName-value">
+                      <input type="text" class="form-control" id="lastName-value" value=" " onchange="getLastName(this.value)"/>
                   </form>
                       <form class="form-group">
                       <label for="greeting">Greeting </label>
-                      <input type="text" class="form-control" id="greeting-value">
+                      <input type="text" class="form-control" id="greeting-value" value=" " onchange="getGreeting(this.value)"/>
                   </form>
-                  <button type ="submit" class="btn btn-primary">Submit</button>
               </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" onclick="addGreetings()">Add Greeting</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeForm()">Close</button>
+            </div>
           </div>
+        </div>
       </div>
-
-<!--To show all the cards-->
-      <div class="posts-list row">
-    </div>
-
-        
-    </div>
-  </div>
-  <script src="./main.js"></script>
+      
+</div>
+</div>
+</div>
+<script src="./main.js"></script>
 </body>
 </html>
