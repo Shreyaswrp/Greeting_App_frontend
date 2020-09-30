@@ -71,7 +71,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form class="add-post-form" id="add-post">
+              <form class="add-post-form">
                   <div class="form-group">
                       <label for="firstName">First Name </label>
                       <input type="text" class="form-control firstName" placeholder="Your first name" name="firstName" required>
@@ -108,15 +108,15 @@
               <form class="edit-post-form">
                   <div class="form-group">
                       <label for="firstName">First Name </label>
-                      <input type="text" class="form-control firstName" value=" " onchange="getFirstName(this.value)"/>
+                      <input type="text" class="firstNameEdit form-control" placeholder="Your first name" name="firstName" required>
                   </div>
                   <div class="form-group">
                       <label for="lastName">Last Name </label>
-                      <input type="text" class="form-control lastName" value=" " onchange="getLastName(this.value)"/>
+                      <input type="text" class="lastNameEdit form-control" placeholder="Your last name" name="lastName" required>
                   </div>
                       <div class="form-group">
                       <label for="greeting">Greeting </label>
-                      <input type="text" class="form-control Greeting" value=" " onchange="getGreeting(this.value)"/>
+                      <input type="text" class="greetingEdit" placeholder="Your greeting" name="greeting" required>
                       </div>
               </form>
             </div>
