@@ -39,6 +39,30 @@ listButton.addEventListener('click', function() {
 
 loadAllTheGreetings();
 
+// Create -Insert new greeting
+function addGreetings(){
+  let firstName = document.querySelector(".firstName").value;
+  let lastName = document.querySelector(".lastName").value;
+  let greeting = document.querySelector(".greeting").value;
+  fetch(urlForCreate, {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      firstName: firstName,
+      lastName: lastName,
+      greeting: greeting 
+    })
+    }).then(data => {
+       closeForm();
+    }) 
+    .catch(err => { 
+      return err;
+    })
+    location.reload();
+}
+
 postsLists.addEventListener('click', (e) => {
 e.preventDefault();
 
@@ -59,31 +83,7 @@ let id = e.target.parentElement.children[0].textContent;
   }
 })
 
-// Create -Insert new greeting
-function addGreetings(){
-  console.log('add function is called');
-  fetch(urlForCreate, {
-    method: 'POST',
-    headers: {
-    'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      firstName: document.querySelector('firstName'),
-      lastName: document.querySelector('lastName'),
-      greeting: document.querySelector('Greeting') 
-    })
-    }).then(data => {
-       closeForm();
-       fetch(url)
-      .then(res => res.json() )
-      .then(result => result.data)
-      .then(data => renderPost(data));
-    }) 
-    .catch(err => { 
-      console.log(err);
-    })
-    console.log('first name' +firstName);
-}
+
 
 function getFormInPopup() {
   document.querySelector('.add-post-greeting').style.display = "block";
