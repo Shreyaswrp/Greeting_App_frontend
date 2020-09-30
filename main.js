@@ -7,6 +7,7 @@ const urlForCreate = 'http://localhost:4000/create-greeting';
 const urlForEdit = 'http://localhost:4000/update-greeting';
 const urlForDelete = 'http://localhost:4000/delete-greeting';
 
+
 const renderPost = (posts) => {
   let output = '';
   posts.forEach(post =>{
@@ -16,9 +17,8 @@ const renderPost = (posts) => {
       <p class="NameOnCard card-p">${post.firstName +' ' +post.lastName}</p>
       <p class="Greeting card-p">${post.greeting}</p>
       <p mt -0 class="CreatedAt card-p">${post.createdAt}</p>
-     <div class="row edit-delete-button"> <div class=" list-group-item-action button-for-edit-delete col-md-5" id="EditForm" onclick="getFormToEditInPopup()">Edit</div>
-      <div class=" list-group-item-action button-for-edit-delete col-md-5" id="DeleteForm">Delete</div>
-    </div>
+      <a href="#" class="card-link" id="EditForm" onclick="editGreeting()">Edit</a>
+      <a href="#" class="card-link" id="DeleteForm">Delete</a>
     </div>
   </div>`;
 });
@@ -64,23 +64,21 @@ function addGreetings(){
 }
 
 postsLists.addEventListener('click', (e) => {
-e.preventDefault();
-
-let deleteButtonPressed = e.target.id == 'DeleteForm'
-let editButtonPressed = e.target.id == 'EditForm'
-
-let id = e.target.parentElement.children[0].textContent;
+  e.preventDefault();
+  let deleteButtonPressed = e.target.id == 'DeleteForm';
+  let editButtonPressed = e.target.id == 'EditForm';
+  let id= e.target.parentElement.children[0].textContent;
   
-  //Delete a greeting
-  //Method: delete
-  if(deleteButtonPressed){
-    fetch(`${urlForDelete}/${id}`,{
-
-      method:'DELETE',
-    })
-    .then(res => res.json())
-    .then(() => location.reload())
-  }
+if(deleteButtonPressed){
+    fetch(`${urlForDelete}/${id}`, {
+        method:'DELETE',
+      })
+      .then(res => res.json())
+      .then(() => location.reload())
+      .catch(err => { 
+        return err;
+      })
+}
 })
 
 
