@@ -106,22 +106,22 @@
             </div>
             <div class="modal-body">
               <form class="edit-post-form">
-                  <div class="form-group">
+                    <div class="form-group">
                       <label for="firstName">First Name </label>
                       <input type="text" class="firstNameEdit form-control" placeholder="Your first name" name="firstName" required>
-                  </div>
-                  <div class="form-group">
+                    </div>
+                    <div class="form-group">
                       <label for="lastName">Last Name </label>
                       <input type="text" class="lastNameEdit form-control" placeholder="Your last name" name="lastName" required>
-                  </div>
-                      <div class="form-group">
-                      <label for="greeting">Greeting </label>
-                      <input type="text" class="greetingEdit" placeholder="Your greeting" name="greeting" required>
-                      </div>
+                    </div>
+                    <div class="form-group">
+                    <label for="greeting">Greeting </label>
+                    <input type="text" class="greetingEdit form-control" placeholder="Your greeting" name="greeting" required>
+                    </div>
               </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Save Changes</button>
+              <button type="button" class="btn btn-primary" onclick="editGreetings()">Save Changes</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeFormForEdit()">Close</button>
             </div>
           </div>
