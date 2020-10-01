@@ -1,3 +1,12 @@
+/**
+ *Purpose  : To carry out the fetch operations from api
+ *@files   : main.js
+ *@overview: API get,put,post,delete opreations
+ *@author  : Shreya Swaroop
+ *@verson  : 1.0
+ *@since   : 22-09-2020
+ */
+
 const listButton = document.querySelector('.load-greetings');
 const postsLists = document.querySelector('.posts-list');
 
@@ -22,7 +31,10 @@ const renderPost = (posts) => {
 postsLists.innerHTML = output;
 }
 
-//To load all the greetings
+/**
+ * @description: load all the greetings data from database and add in div
+ * @returns: error if any
+ */
 function loadAllTheGreetings(){
   fetch(`${URL}find-greetings`)
   .then(res => res.json() )
@@ -36,7 +48,10 @@ listButton.addEventListener('click', function() {
 
 loadAllTheGreetings();
 
-// Create -Insert new greeting
+/**
+ * @description: add the new greetigs to the database
+ * @returns: error if any
+ */
 function addGreetings(){
   fetch(`${URL}create-greeting`, {
     method: 'POST',
@@ -62,7 +77,11 @@ postsLists.addEventListener('click', (e) => {
   let deleteButtonPressed = e.target.id == 'DeleteForm';
   let editButtonPressed = e.target.id == 'EditForm';
   id= e.target.parentElement.children[0].textContent;
-  
+ 
+/**
+ * @description: delete the card from database using the id
+ * @returns: error if any
+ */
 if(deleteButtonPressed){
     fetch(`${URL}delete-greeting/${id}`, {
         method:'DELETE',
@@ -85,6 +104,10 @@ if(editButtonPressed){
 }
 })
 
+/**
+ * @description: edit the existing greeting in the database using id
+ * @returns: error if any
+ */
 function editGreetings(){
   fetch(`${URL}update-greeting/${id}`, {
     method: 'PUT',
@@ -105,14 +128,17 @@ function editGreetings(){
     location.reload();
 }
 
+//to display the add form
 function getFormInPopup() {
   document.querySelector('.add-post-greeting').style.display = "block";
 }
 
+//to hide the add form
 function closeForm() {
   document.querySelector('.add-post-greeting').style.display = "none";
 }
 
+//to hide the edit form
 function closeFormForEdit() {
   document.querySelector('.edit-post-greeting').style.display = "none";
 }
