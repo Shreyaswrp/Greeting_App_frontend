@@ -18,11 +18,11 @@ const renderPost = (posts) => {
   let output = '';
   posts.forEach(post =>{
     let date = post.createdAt.split('-')[0]+"-"+post.createdAt.split('-')[1]+"-"+post.createdAt.split('-')[2][0]+post.createdAt.split('-')[2][1];
-    output += `<div class="card mt-4 col-md-3 bg" >
+    output += `<div class="card mt-4 col-md-3 card-contents" >
     <div class="card-body">
-      <div class="object-id">${post._id}</div>
+      <div class="object-id">ObjectId('${post._id}')</div>
       <div class="name-on-card">${post.firstName +' ' +post.lastName} (name)</div>
-      <div class="greeting">${post.greeting} (Greeting)</div>
+      <div class="greeting-of-card">${post.greeting} (Greeting)</div>
       <div mt -0 class="created-at">${date}</div>
       <span class="card-link fa fa-pencil-square-o edit-delete-button" id="EditForm"></span>
       <span class="card-link fa fa-trash edit-delete-button" id="DeleteForm"></span>
@@ -77,13 +77,12 @@ function addGreetings(){
     document.getElementById("contain-no-lname").style.cssText += "display : block !important"
   }
 
-  let regexConst2 = new RegExp(/^[a-zA-Z,\s]{3,}$/);
-  if(!regexConst2.test(greeting))
+  if(greeting.length < 3)
   {
     document.getElementById("contain-no-greeting").style.cssText += "display : block !important"
   }
 
-  if( regexConst.test(firstName) && regexConst.test(lastName) && regexConst2.test(greeting) ){
+  if( regexConst.test(firstName) && regexConst.test(lastName) && greeting.length >= 3){
 
   fetch(`${URL}create-greeting`, {
     method: 'POST',
@@ -95,12 +94,14 @@ function addGreetings(){
       lastName: lastName,
       greeting: greeting
     })
-    }).then(res => res.json())
+    }).then(res => {res.json()
+      alert("successfully added");
+    })
     .catch(err => { 
       return err;
     })
-    closeForm()
-    location.reload()
+    closeForm();
+    location.reload();
   }
 }
 
@@ -118,6 +119,8 @@ postsLists.addEventListener('click', (e) => {
   let first_name = e.target.parentElement.children[1].textContent.split(' ')[0];
   let last_name = e.target.parentElement.children[1].textContent.split(' ')[1];
   let greeting = e.target.parentElement.children[2].textContent;
+
+  
 
   document.querySelector(".firstNameEdit").value=first_name;
   document.querySelector(".lastNameEdit").value=last_name;
@@ -188,7 +191,9 @@ function editGreetings(){
       greeting: greeting
     })
     })
-    .then(res => res.json()) 
+    .then(res => {res.json()
+      alert("successfully edited");
+    }) 
     .catch(err => { 
       return err;
     })
@@ -229,7 +234,6 @@ function closeFormForDelete() {
 }
 
 function openFormToEdit() {
-
   document.querySelector('.edit-post-greeting').style.display = "block";
   document.getElementById("contain-no-fname-edit").style.cssText += "display : none !important"
   document.getElementById("contain-no-lname-edit").style.cssText += "display : none !important"
