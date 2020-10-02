@@ -40,6 +40,9 @@ function loadAllTheGreetings(){
   .then(res => res.json() )
   .then(result => result.data)
   .then(data => renderPost(data))
+  .catch(err =>{
+    return err
+  })
 }
 
 listButton.addEventListener('click', function() {
@@ -53,30 +56,57 @@ loadAllTheGreetings();
  * @returns: error if any
  */
 function addGreetings(){
+  document.getElementById("contain-no-fname").style.cssText += "display : none !important"
+  document.getElementById("contain-no-lname").style.cssText += "display : none !important"
+  document.getElementById("contain-no-greeting").style.cssText += "display : none !important"
+
+  let firstName = document.querySelector(".firstName").value;
+  let lastName = document.querySelector(".lastName").value;
+  let greeting = document.querySelector(".greeting").value;
+
+  let regexConst = new RegExp(/^[a-zA-Z]{3,}$/);
+  
+  if(!regexConst.test(firstName))
+  {
+    document.getElementById("contain-no-fname").style.cssText += "display : block !important"
+  }
+
+  if(!regexConst.test(lastName))
+  {
+    document.getElementById("contain-no-lname").style.cssText += "display : block !important"
+  }
+
+  if(!regexConst.test(greeting))
+  {
+    document.getElementById("contain-no-greeting").style.cssText += "display : block !important"
+  }
+
+  if( regexConst.test(firstName) && regexConst.test(lastName) && regexConst.test(greeting) ){
+
   fetch(`${URL}create-greeting`, {
     method: 'POST',
     headers: {
     'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      firstName: document.querySelector(".firstName").value,
-      lastName: document.querySelector(".lastName").value,
-      greeting: document.querySelector(".greeting").value 
+      firstName: firstName,
+      lastName: lastName,
+      greeting: greeting
     })
-    }).then(data => {
-       closeForm();
-    }) 
+    }).then(res => res.json())
     .catch(err => { 
-      console.log(err);
+      return err;
     })
-    location.reload();
+    closeForm()
+    location.reload()
+  }
 }
 
 postsLists.addEventListener('click', (e) => {
   e.preventDefault();
   let deleteButtonPressed = e.target.id == 'DeleteForm';
   let editButtonPressed = e.target.id == 'EditForm';
-  id= e.target.parentElement.children[0].textContent;
+  id = e.target.parentElement.children[0].textContent;
  
 /**
  * @description: delete the card from database using the id

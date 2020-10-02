@@ -75,14 +75,17 @@
                   <div class="form-group">
                       <label for="firstName">First Name </label>
                       <input type="text" class="form-control firstName" placeholder="Your first name" name="firstName" required>
+                      <div class="input-valid fa fa-asterisk d-none" id="contain-no-fname">First name should contain min 3 chars and must not contain numbers.</div>
                   </div>
                   <div class="form-group">
                       <label for="lastName">Last Name </label>
                       <input type="text" class="form-control lastName" placeholder="Your last name" name="lastName" required>
+                      <div class="input-valid fa fa-asterisk d-none" id="contain-no-lname">Last name should contain min 3 chars and must not contain numbers.</div>
                   </div>
                   <div class="form-group">
                       <label for="greeting">Greeting </label>
                       <input type="text" class="form-control greeting" placeholder="Your greeting" name="greeting" required>
+                      <div class="input-valid fa fa-asterisk d-none" id="contain-no-greeting">Greeting should contain min 3 chars and must not contain numbers.</div>
                   </div>
               </form>
             </div>
