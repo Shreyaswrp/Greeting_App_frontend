@@ -109,8 +109,8 @@ postsLists.addEventListener('click', (e) => {
   e.preventDefault();
   let deleteButtonPressed = e.target.id == 'DeleteForm';
   let editButtonPressed = e.target.id == 'EditForm';
-  id = e.target.parentElement.children[0].textContent;
- 
+  id = e.target.parentElement.children[0].textContent.split('\'')[1];
+
   if(deleteButtonPressed){
     openConfirmFormToDelete();
   }
@@ -118,13 +118,19 @@ postsLists.addEventListener('click', (e) => {
   if(editButtonPressed){
   let first_name = e.target.parentElement.children[1].textContent.split(' ')[0];
   let last_name = e.target.parentElement.children[1].textContent.split(' ')[1];
-  let greeting = e.target.parentElement.children[2].textContent;
+  let greeting = e.target.parentElement.children[2].textContent.split(' ');
 
-  
+  let greeting_length=greeting.length;
+
+  let message ="";
+
+  for(let m=0;m<greeting_length-1;m++){
+      message+=greeting[m]+" ";
+  }
 
   document.querySelector(".firstNameEdit").value=first_name;
   document.querySelector(".lastNameEdit").value=last_name;
-  document.querySelector(".greetingEdit").value=greeting;
+  document.querySelector(".greetingEdit").value=message;
   openFormToEdit();
   }
 })
@@ -138,12 +144,13 @@ function deleteGreeting() {
     method:'DELETE',
   })
   .then(res => {res.json()
-    closeFormForDelete()
-    location.reload()
+    alert("successfully deleted");
   })
   .catch(err => { 
     return err;
   })
+  closeFormForDelete()
+  location.reload()
 }
 
 /**
@@ -161,7 +168,6 @@ function editGreetings(){
 
   let regexConst = new RegExp(/^[a-zA-Z]{3,}$/);
 
-
   if(!regexConst.test(firstName))
   {
     document.getElementById("contain-no-fname-edit").style.cssText += "display : block !important"
@@ -172,13 +178,12 @@ function editGreetings(){
     document.getElementById("contain-no-lname-edit").style.cssText += "display : block !important"
   }
 
-  let regexConst2 = new RegExp(/^[a-zA-Z,\s]{3,}$/);
-  if(!regexConst2.test(greeting))
+  if(greeting.length<3)
   {
     document.getElementById("contain-no-greeting-edit").style.cssText += "display : block !important"
   }
 
-  if( regexConst.test(firstName) && regexConst.test(lastName) && regexConst2.test(greeting) ){
+  if( regexConst.test(firstName) && regexConst.test(lastName) && greeting.length >= 3 ){
 
   fetch(`${URL}update-greeting/${id}`, {
     method: 'PUT',

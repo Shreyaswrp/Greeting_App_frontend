@@ -70,16 +70,22 @@ body {
 .card-body {
   float: left;
   list-style: none;
-  border-radius: 10px;
+  border-radius: 0px;
   box-shadow: 2px 2px 2px 2px rgb(196, 196, 196);
   border-color: #666;
   border-width: 4px;
+  max-height: 300px;
+  font-size: small;
 }
 
 .card-contents {
   border: none !important;
   float: left;
-  max-width: 100%;
-  max-height: 10%;
-  margin-left: 67px
+  margin-left: 67px;
+  max-height: 300px;
 }
+
+.card {
+  max-height: 200px;
+}
+
