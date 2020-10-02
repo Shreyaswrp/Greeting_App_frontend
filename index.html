@@ -112,20 +112,44 @@
                     <div class="form-group">
                       <label for="firstName">First Name </label>
                       <input type="text" class="firstNameEdit form-control" placeholder="Your first name" name="firstName" required>
+                      <div class="input-valid fa fa-asterisk d-none" id="contain-no-fname-edit">First name should contain min 3 chars and must not contain numbers.</div>
                     </div>
                     <div class="form-group">
                       <label for="lastName">Last Name </label>
                       <input type="text" class="lastNameEdit form-control" placeholder="Your last name" name="lastName" required>
+                      <div class="input-valid fa fa-asterisk d-none" id="contain-no-lname-edit">Last name should contain min 3 chars and must not contain numbers.</div>
                     </div>
-                    <div class="form-group">
+                  <div class="form-group">
                     <label for="greeting">Greeting </label>
                     <input type="text" class="greetingEdit form-control" placeholder="Your greeting" name="greeting" required>
+                    <div class="input-valid fa fa-asterisk d-none" id="contain-no-greeting-edit">Greeting should contain min 3 chars and must not contain numbers.</div>
                     </div>
               </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" onclick="editGreetings()">Save Changes</button>
+              <button type="button" class="btn btn-primary" onclick="editGreetings()">Submit</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeFormForEdit()">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--To ask to confirm before deleting-->
+      <div class="modal delete-form" >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Delete Greeting </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" onclick="closeFormForDelete()">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to delete the greeting?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" onclick="deleteGreeting()">OK</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeFormForDelete()">Cancel</button>
             </div>
           </div>
         </div>
