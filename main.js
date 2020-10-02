@@ -18,12 +18,12 @@ const renderPost = (posts) => {
   let output = '';
   posts.forEach(post =>{
     let date = post.createdAt.split('-')[0]+"-"+post.createdAt.split('-')[1]+"-"+post.createdAt.split('-')[2][0]+post.createdAt.split('-')[2][1];
-    output += `<div class="card mt-4 col-md-4 bg" >
+    output += `<div class="card mt-4 col-md-3 bg" >
     <div class="card-body">
-      <div class="ObjectId card-p">${post._id}</div>
-      <div class="name-on-card card-p">${post.firstName +' ' +post.lastName} (name)</div>
-      <div class="Greeting card-p">${post.greeting} (Greeting)</div>
-      <div mt -0 class="CreatedAt card-p">${date}</div>
+      <div class="object-id">${post._id}</div>
+      <div class="name-on-card">${post.firstName +' ' +post.lastName} (name)</div>
+      <div class="greeting">${post.greeting} (Greeting)</div>
+      <div mt -0 class="created-at">${date}</div>
       <span class="card-link fa fa-pencil-square-o edit-delete-button" id="EditForm"></span>
       <span class="card-link fa fa-trash edit-delete-button" id="DeleteForm"></span>
     </div>
@@ -77,12 +77,13 @@ function addGreetings(){
     document.getElementById("contain-no-lname").style.cssText += "display : block !important"
   }
 
-  if(!regexConst.test(greeting))
+  let regexConst2 = new RegExp(/^[a-zA-Z,\s]{3,}$/);
+  if(!regexConst2.test(greeting))
   {
     document.getElementById("contain-no-greeting").style.cssText += "display : block !important"
   }
 
-  if( regexConst.test(firstName) && regexConst.test(lastName) && regexConst.test(greeting) ){
+  if( regexConst.test(firstName) && regexConst.test(lastName) && regexConst2.test(greeting) ){
 
   fetch(`${URL}create-greeting`, {
     method: 'POST',
@@ -168,12 +169,13 @@ function editGreetings(){
     document.getElementById("contain-no-lname-edit").style.cssText += "display : block !important"
   }
 
-  if(!regexConst.test(greeting))
+  let regexConst2 = new RegExp(/^[a-zA-Z,\s]{3,}$/);
+  if(!regexConst2.test(greeting))
   {
     document.getElementById("contain-no-greeting-edit").style.cssText += "display : block !important"
   }
 
-  if( regexConst.test(firstName) && regexConst.test(lastName) && regexConst.test(greeting) ){
+  if( regexConst.test(firstName) && regexConst.test(lastName) && regexConst2.test(greeting) ){
 
   fetch(`${URL}update-greeting/${id}`, {
     method: 'PUT',
