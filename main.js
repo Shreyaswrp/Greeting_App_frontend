@@ -17,12 +17,13 @@ let id = ' ';
 const renderPost = (posts) => {
   let output = '';
   posts.forEach(post =>{
-    output += `<div class="card mt-4 col-md-3 bg-ligt" >
+    let date = post.createdAt.split('-')[0]+"-"+post.createdAt.split('-')[1]+"-"+post.createdAt.split('-')[2][0]+post.createdAt.split('-')[2][1];
+    output += `<div class="card mt-4 col-md-4 bg" >
     <div class="card-body">
       <div class="ObjectId card-p">${post._id}</div>
-      <div class="name-on-card card-p">${post.firstName +' ' +post.lastName}</div>
-      <div class="Greeting card-p">${post.greeting}</div>
-      <div mt -0 class="CreatedAt card-p">${post.createdAt}</div>
+      <div class="name-on-card card-p">${post.firstName +' ' +post.lastName} (name)</div>
+      <div class="Greeting card-p">${post.greeting} (Greeting)</div>
+      <div mt -0 class="CreatedAt card-p">${date}</div>
       <span class="card-link fa fa-pencil-square-o edit-delete-button" id="EditForm"></span>
       <span class="card-link fa fa-trash edit-delete-button" id="DeleteForm"></span>
     </div>
@@ -108,21 +109,11 @@ postsLists.addEventListener('click', (e) => {
   let editButtonPressed = e.target.id == 'EditForm';
   id = e.target.parentElement.children[0].textContent;
  
-/**
- * @description: delete the card from database using the id
- * @returns: error if any
- */
-if(deleteButtonPressed){
-    fetch(`${URL}delete-greeting/${id}`, {
-        method:'DELETE',
-      })
-      .then(res => res.json())
-      .then(() => location.reload())
-      .catch(err => { 
-        return err;
-      })
-}
-if(editButtonPressed){
+  if(deleteButtonPressed){
+    openConfirmFormToDelete();
+  }
+
+  if(editButtonPressed){
   let first_name = e.target.parentElement.children[1].textContent.split(' ')[0];
   let last_name = e.target.parentElement.children[1].textContent.split(' ')[1];
   let greeting = e.target.parentElement.children[2].textContent;
@@ -130,24 +121,69 @@ if(editButtonPressed){
   document.querySelector(".firstNameEdit").value=first_name;
   document.querySelector(".lastNameEdit").value=last_name;
   document.querySelector(".greetingEdit").value=greeting;
-  document.querySelector('.edit-post-greeting').style.display = "block";
-}
+  openFormToEdit();
+  }
 })
+
+/**
+ * @description: delete the card from database using the id
+ * @returns: error if any
+ */
+function deleteGreeting() {
+  fetch(`${URL}delete-greeting/${id}`, {
+    method:'DELETE',
+  })
+  .then(res => {res.json()
+    closeFormForDelete()
+    location.reload()
+  })
+  .catch(err => { 
+    return err;
+  })
+}
 
 /**
  * @description: edit the existing greeting in the database using id
  * @returns: error if any
  */
 function editGreetings(){
+  document.getElementById("contain-no-fname-edit").style.cssText += "display : none !important"
+  document.getElementById("contain-no-lname-edit").style.cssText += "display : none !important"
+  document.getElementById("contain-no-greeting-edit").style.cssText += "display : none !important"
+
+  let firstName = document.querySelector(".firstNameEdit").value;
+  let lastName = document.querySelector(".lastNameEdit").value;
+  let greeting = document.querySelector(".greetingEdit").value;
+
+  let regexConst = new RegExp(/^[a-zA-Z]{3,}$/);
+
+
+  if(!regexConst.test(firstName))
+  {
+    document.getElementById("contain-no-fname-edit").style.cssText += "display : block !important"
+  }
+
+  if(!regexConst.test(lastName))
+  {
+    document.getElementById("contain-no-lname-edit").style.cssText += "display : block !important"
+  }
+
+  if(!regexConst.test(greeting))
+  {
+    document.getElementById("contain-no-greeting-edit").style.cssText += "display : block !important"
+  }
+
+  if( regexConst.test(firstName) && regexConst.test(lastName) && regexConst.test(greeting) ){
+
   fetch(`${URL}update-greeting/${id}`, {
     method: 'PUT',
     headers: {
     'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      firstName: document.querySelector(".firstNameEdit").value,
-      lastName: document.querySelector(".lastNameEdit").value,
-      greeting: document.querySelector(".greetingEdit").value
+      firstName: firstName,
+      lastName: lastName,
+      greeting: greeting
     })
     })
     .then(res => res.json()) 
@@ -156,13 +192,25 @@ function editGreetings(){
     })
     closeFormForEdit();
     location.reload();
+  }
 }
 
 //to display the add form
 function getFormInPopup() {
   document.querySelector('.add-post-greeting').style.display = "block";
+
+  document.querySelector(".firstName").value = '';
+  document.querySelector(".lastName").value = '';
+  document.querySelector(".greeting").value = '';
+
+  document.getElementById("contain-no-fname").style.cssText += "display : none !important"
+  document.getElementById("contain-no-lname").style.cssText += "display : none !important"
+  document.getElementById("contain-no-greeting").style.cssText += "display : none !important"
 }
 
+function openConfirmFormToDelete() {
+      document.querySelector('.delete-form').style.display = "block";
+}
 //to hide the add form
 function closeForm() {
   document.querySelector('.add-post-greeting').style.display = "none";
@@ -173,3 +221,15 @@ function closeFormForEdit() {
   document.querySelector('.edit-post-greeting').style.display = "none";
 }
 
+//to hide the delete form
+function closeFormForDelete() {
+  document.querySelector('.delete-form').style.display = "none";
+}
+
+function openFormToEdit() {
+
+  document.querySelector('.edit-post-greeting').style.display = "block";
+  document.getElementById("contain-no-fname-edit").style.cssText += "display : none !important"
+  document.getElementById("contain-no-lname-edit").style.cssText += "display : none !important"
+  document.getElementById("contain-no-greeting-edit").style.cssText += "display : none !important"
+}
