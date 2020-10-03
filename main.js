@@ -18,12 +18,12 @@ const renderPost = (posts) => {
   let output = '';
   posts.forEach(post =>{
     let date = post.createdAt.split('-')[0]+"-"+post.createdAt.split('-')[1]+"-"+post.createdAt.split('-')[2][0]+post.createdAt.split('-')[2][1];
-    output += `<div class="card mt-4 col-md-3 card-contents" >
-    <div class="card-body">
-      <div class="object-id">ObjectId('${post._id}')</div>
-      <div class="name-on-card">${post.firstName +' ' +post.lastName} (name)</div>
-      <div class="greeting-of-card">${post.greeting} (Greeting)</div>
-      <div mt -0 class="created-at">${date}</div>
+    output += `<div class="card mt-4 mr-4 col-md-4 card-contents" >
+    <div class="card-body card=dim">
+      <div mb-2 class="object-id">ObjectId('${post._id}')</div>
+      <div mb-2 class="name-on-card">${post.firstName +' ' +post.lastName} (name)</div>
+      <div mb-2 class="greeting-of-card">${post.greeting} (Greeting)</div>
+      <div mt-4 class="created-at">${date}</div>
       <span class="card-link fa fa-pencil-square-o edit-delete-button" id="EditForm"></span>
       <span class="card-link fa fa-trash edit-delete-button" id="DeleteForm"></span>
     </div>

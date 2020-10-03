@@ -1,0 +1,83 @@
+*{ margin:   0;padding: 0; box-sizing: border-box;}
+
+body {
+  font-family: Arial;
+  color: black;
+}
+
+.button-for-sign-up-sign-in {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 9px 26px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+.button-for-edit-delete {
+  background-color: blueviolet;
+  border: none;
+  color: white;
+  padding: 9px 26px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+.page-title {
+  padding-top: 3%;
+  margin-left: 8%;
+  color: black;
+  font-weight: bold;
+}
+
+.card {
+  display: flex;
+  margin-left: 8%;
+  flex-direction: row;
+  justify-items: normal;
+  border: 4px groove rgba(255, 228, 220, 0.7);
+}
+
+.container{
+  margin: 0;
+  max-width: 98rem;
+  width: 100%;
+  height: 100%;
+}
+
+.navList {
+  margin-top: 0;
+  padding-top: 4rem;
+  padding-right: 0;
+  padding-left: 4;
+  background-color: rgba(168, 211, 244, 0.25);
+  height: 45rem;
+}
+
+.side-items {
+  background-color: rgba(168, 211, 244, 0.01);
+  padding-top: 1.5rem;
+  height: 4.5rem;
+  font-size: 1.3rem;
+  border: 0;
+}
+
+.front-page {
+  padding: 0;
+}
+
+.card-p {
+  margin-bottom: 0.2rem;
+}
+
+.edit-delete-button{
+  display: inline !important;
+}
